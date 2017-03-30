@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../angular.js"></script>
+</head>
+<body ng-app="app">
+    <input type="text" ng-model="txt">
+    <table border=1 width=500>
+        <thead>
+            <th>name</th>
+            <th>age</th>
+            <th>gender</th>            
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in list | filter:{name:txt} ">
+                <td>{{item.name}}</td>
+                <td>{{item.age}}</td>
+                <td>{{item.gender}}</td>                
+            </tr>
+        </tbody>
+    </table>
+</body>
+<script>
+    var data=[
+        {name:"zs",age:12,gender:"male"},
+        {name:"ls",age:23,gender:"female"},
+        {name:"ww",age:35,gender:"male"},
+        {name:"zl",age:45,gender:"female"},
+        {name:"tq",age:62,gender:"male"}
+    ];
+
+    angular.module("app",[])
+            .run(function($rootScope){
+                $rootScope.list=data;
+            })
+</script>
+</html>

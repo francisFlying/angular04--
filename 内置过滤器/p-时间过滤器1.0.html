@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../angular.js"></script>
+    <script src="./angular-locale_zh-cn.js"></script>
+</head>
+<body ng-app="app">
+    {{now}}
+    <br>
+    {{now | date:'yyyy年MM月dd日 hh时mm分ss秒 EEEE'}}
+</body>
+
+<script>
+    angular.module("app",[])
+            .run(function($rootScope){
+                $rootScope.now=new Date();
+            })
+</script>
+</html>

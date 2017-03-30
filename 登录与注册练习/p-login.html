@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .warning,.failed{
+            color:red;
+        }
+        .success{
+            color:green;
+        }
+    </style>
+</head>
+<script src="../angular.js"></script>
+<body ng-app="app">
+    <div ng-controller="con">
+        用户名：<input type="text" ng-model="id"><br>
+        密码：<input type="text" ng-model="pwd"><br>
+        <div class="warning">{{warningText}}</div>
+        <div class="{{message}}">{{messageText}}</div>
+        <button ng-click="login()">login</button>
+    </div>
+</body>
+
+<script>
+    (function(){
+        //封装函数判断用户输入的用户名和密码是否为空
+        function isEmptyOrWhitespace(scope,key){
+            return scope[key]==undefined || scope[key].trim().length==0;
+        }
+
+        var app=angular.module("app",[])
+        .controller("con",["$scope",function($scope){
+            $scope.login=function(){
+                //点击发生，先清空
+                $scope.warningText="";
+                $scope.messageText="";
+                $scope.message="";
+                //判断用户输入的是否为空
+                if(isEmptyOrWhitespace($scope,"id") || isEmptyOrWhitespace($scope,"pwd")){
+                    $scope.warningText="您未输入用户名或者密码，请正确输入";
+                    return;
+                }
+
+                //此处应发送ajax请求并验证，此处进行模拟
+                if($scope.id=="admin" && $scope.pwd=="888888"){
+                    $scope.message="success";
+                    $scope.messageText="登录成功";
+                }else{
+                    $scope.message="failed";
+                    $scope.messageText="您输入的用户名或密码有误";
+                }
+            }
+        }])
+    })()
+</script>
+</html>
